@@ -1,0 +1,11 @@
+.env
+mlflow.db
+mlruns/
+mlartifacts/
+Artifacts/
+logs/
+final_model/
+data/raw/*.csv
+*.arff
+__pycache__/
+.pytest_cache/

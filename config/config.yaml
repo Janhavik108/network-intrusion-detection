@@ -1,0 +1,47 @@
+data:
+  csv_path: data/raw/traffic.csv        # used when MONGO_URI is not set
+  target: label                          # raw label column
+  benign_labels: [normal, benign]        # anything else is treated as an attack
+  test_size: 0.2
+  seed: 42
+
+mongo:
+  database: netguard
+  collection: traffic
+
+features:
+  numeric:
+    - duration
+    - src_bytes
+    - dst_bytes
+    - count
+    - srv_count
+    - serror_rate
+    - rerror_rate
+    - same_srv_rate
+    - logged_in
+  categorical:
+    - protocol_type
+    - service
+
+validation:
+  max_missing_fraction: 0.30
+  drift_p_value: 0.01
+  max_drifted_fraction: 0.30
+  fail_on_drift: false
+
+training:
+  selection_metric: f1                   # CV metric used to pick the winner
+  cv_folds: 3
+  promotion_min_delta: 0.0               # candidate must beat champion by this much
+
+mlflow:
+  experiment: netguard-intrusion-detection
+
+paths:
+  artifacts_dir: Artifacts
+  final_model_dir: final_model
+  logs_dir: logs
+
+s3:
+  prefix: netguard

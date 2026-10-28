@@ -1,0 +1,72 @@
+data:
+  csv_path: data\raw\nslkdd_train.csv
+  target: class
+  benign_labels:
+  - normal
+  test_size: 0.2
+  seed: 42
+  test_csv_path: data\raw\nslkdd_test.csv
+mongo:
+  database: netguard
+  collection: traffic
+features:
+  numeric:
+  - duration
+  - src_bytes
+  - dst_bytes
+  - land
+  - wrong_fragment
+  - urgent
+  - hot
+  - num_failed_logins
+  - logged_in
+  - num_compromised
+  - root_shell
+  - su_attempted
+  - num_root
+  - num_file_creations
+  - num_shells
+  - num_access_files
+  - num_outbound_cmds
+  - is_host_login
+  - is_guest_login
+  - count
+  - srv_count
+  - serror_rate
+  - srv_serror_rate
+  - rerror_rate
+  - srv_rerror_rate
+  - same_srv_rate
+  - diff_srv_rate
+  - srv_diff_host_rate
+  - dst_host_count
+  - dst_host_srv_count
+  - dst_host_same_srv_rate
+  - dst_host_diff_srv_rate
+  - dst_host_same_src_port_rate
+  - dst_host_srv_diff_host_rate
+  - dst_host_serror_rate
+  - dst_host_srv_serror_rate
+  - dst_host_rerror_rate
+  - dst_host_srv_rerror_rate
+  categorical:
+  - protocol_type
+  - service
+  - flag
+validation:
+  max_missing_fraction: 0.3
+  drift_p_value: 0.01
+  max_drifted_fraction: 0.3
+  fail_on_drift: false
+training:
+  selection_metric: f1
+  cv_folds: 3
+  promotion_min_delta: 0.0
+mlflow:
+  experiment: netguard-intrusion-detection
+paths:
+  artifacts_dir: Artifacts
+  final_model_dir: final_model
+  logs_dir: logs
+s3:
+  prefix: netguard

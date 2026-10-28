@@ -1,0 +1,13 @@
+scikit-learn==1.9.1
+pandas
+numpy
+scipy
+pyyaml
+python-dotenv
+fastapi
+uvicorn[standard]
+python-multipart
+joblib
+mlflow
+pymongo
+boto3

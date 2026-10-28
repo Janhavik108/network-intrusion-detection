@@ -1,0 +1,11 @@
+.env
+.git
+__pycache__
+*.pyc
+Artifacts
+logs
+mlruns
+mlartifacts
+mlflow.db
+tests
+data/raw
